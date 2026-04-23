@@ -62,13 +62,14 @@ def processing_node(state: GraphState) -> GraphState:
     query   = state[STATE_QUERY]
     context = state[STATE_CONTEXT]
 
-    # Fallback
+    # If retrieval finds no usable context, escalate instead of pretending this
+    # is a normal answered case. This keeps the bot grounded in the knowledge base.
     if not context.strip():
-        logger.info("No context available — returning fallback without LLM call.")
+        logger.info("No context available — escalating without LLM call.")
         return {
             **state,
-            STATE_RESPONSE: "No relevant information found in the knowledge base.",
-            STATE_ESCALATE: False,
+            STATE_RESPONSE: "",
+            STATE_ESCALATE: True,
         }
 
     # Call Groq LLM 

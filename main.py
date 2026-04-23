@@ -33,9 +33,9 @@ def main():
     # Optional ingestion 
     if args.ingest:
         from src.ingest import run_ingestion
-        print("\n📥  Running document ingestion …\n")
+        print("\nRunning document ingestion …\n")
         run_ingestion()
-        print("\n✅  Ingestion complete. Chunks stored in ChromaDB.\n")
+        print("\nIngestion complete. Chunks stored in ChromaDB.\n")
 
     # Load vectorstore and build graph
     from src.retriever import load_vectorstore
@@ -45,7 +45,7 @@ def main():
     vectorstore = load_vectorstore()
     print("⚙️   Compiling LangGraph …")
     graph = build_graph()
-    print("✅  System ready.\n")
+    print("System ready.\n")
 
     # Single-shot mode 
     if args.query:
